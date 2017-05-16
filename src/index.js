@@ -2,6 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+/*
+class Square extends React.Component { //this is a REACT COMPONENT CLASS
+  // No need for constructor because Square does not have state anymore
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     value: null,
+  //   };
+  // }
+
+  render() {
+    return (
+      // <button className="square" onClick={() => alert(`You clicked ${this.props.value}`)}>
+      //<button className="square" onClick={() => this.setState({ value: 'X' })}>
+      //  {this.state.value}
+      //</button>
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
+      </button>
+    );
+  }
+}
+*/
+
 // Instead of the Square above. THis is an example of a functional component
 // It is useful for component types that only consist of a render method
 function Square(props) {
@@ -12,18 +37,43 @@ function Square(props) {
   );
 }
 
-
 class Board extends React.Component {
+  /*constructor() {
+    super();
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }*/
+  // Because we moved the state up to the Game. Just like we move it up from Square to Board
+
   renderSquare(i) {
     return (
       <Square
+        //value={this.state.squares[i]}
+        //onClick={() => this.handleClick(i)}
         value={this.props.squares[i]}
         onClick={ () => this.props.onClick(i)}
       />
     );
   }
 
+ 
+
   render() {
+    /*
+    //const status = 'Next player: X';
+    //const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner){
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + ( this.state.xIsNext ? 'X' : 'O');
+    }
+    */
+    // No need, everything is at the Game Component already.
+
     return (
       <div>
         <div className="board-row">
@@ -69,11 +119,15 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+
+    //const squares = this.state.squares.slice(); //immutability is important!
+    //squares[i] = 'X';
     
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+    //this.setState({ squares: squares });
     this.setState({
       history: history.concat([{
         squares: squares,
