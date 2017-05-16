@@ -103,7 +103,7 @@ class Game extends React.Component {
   }
 
   // Renders the game board according to the state
-  // Recall: State consists of history Array of sqaures and stepNumber and xIsNext 
+  // Recall: State consists of history Array of squares and stepNumber and xIsNext 
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -117,9 +117,13 @@ class Game extends React.Component {
     // (2) 
     // Array.map() creates a new array 
     // with the the results of calling a provided function on every element in the calling array
+
+    // moves is a array of moves in the side of the Board
     const moves = history.map((step, move) => {
+      console.log("move: " + move);
+      console.log("step: " + step);
       const desc = move ?
-        'Move #' + move + " LOL" :
+        'Move #' + move :
         'Game start';
       return (
         //keys are important in dynamic lists!
@@ -139,11 +143,13 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
+          {/* I need to figure out what is goin on here.*/}
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
+        {/* I need to figure out what is goin on here.*/}
         <div className="game-info">
           <div>{status}</div>
           <ol>{moves}</ol>
