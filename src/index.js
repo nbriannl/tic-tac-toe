@@ -75,7 +75,6 @@ class Game extends React.Component {
     // arr.slice(begin , end) returns a shallow copy of a portion of arr into a new Array obj selected
     // from begin inclusive to end exclusive
     // this.state.history obtains a reference to the state of the Game object.
-    //
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
